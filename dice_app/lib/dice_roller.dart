@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 import 'dart:math';
+import 'package:just_audio/just_audio.dart';
 
 final randomizer = Random();
 
@@ -14,10 +16,26 @@ class DiceRoller extends StatefulWidget {
 
 class _DiceRollerState extends State<DiceRoller> {
   var currentDiceRoll = 2;
+  int counter = 1;
+  AudioPlayer player = AudioPlayer();
 
-  void rollDice() {
-    setState(() {
-      currentDiceRoll = randomizer.nextInt(6) + 1;
+  Future<void> rollDice() async {
+    await player.setAsset('assets/audios/dice.mp3');
+    player.play();
+
+    Timer.periodic(const Duration(milliseconds: 80), (timer) {
+      counter++;
+      setState(() {
+        currentDiceRoll = randomizer.nextInt(6) + 1;
+      });
+
+      if (counter >= 13) {
+        timer.cancel();
+
+        setState(() {
+          counter = 1;
+        });
+      }
     });
   }
 
