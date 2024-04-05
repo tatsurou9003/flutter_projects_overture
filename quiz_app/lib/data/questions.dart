@@ -2,7 +2,7 @@ import "package:quiz_app/models/quiz_question.dart";
 
 const questions = [
   QuizQuestion(
-    'What are the main building blocks of Flutter UIs?',
+    'Flutterにおいて最も主要な構成要素はどれ？',
     [
       'Widgets',
       'Components',
@@ -10,46 +10,46 @@ const questions = [
       'Functions',
     ],
   ),
-  QuizQuestion('How are Flutter UIs built?', [
-    'By combining widgets in code',
-    'By combining widgets in a visual editor',
-    'By defining widgets in config files',
-    'By using XCode for iOS and Android Studio for Android',
+  QuizQuestion('どうやってFlutterのUIは構成される？', [
+    'コード内でWidgetツリーが構成される',
+    'エディター内でWidgetツリーが構成される',
+    'ConfigファイルでWidgetツリーが定義される',
+    'XCode for iOS もしくは Android Studioが頑張る',
   ]),
   QuizQuestion(
-    'What\'s the purpose of a StatefulWidget?',
+    'StatefulWidgetを利用する利点は？',
     [
-      'Update UI as data changes',
-      'Update data as UI changes',
-      'Ignore data changes',
-      'Render UI that does not depend on data',
+      'データに変更が生じたときにUIを再構成するため',
+      'データに変更が生じたときにデータを再構成するため',
+      'データの変更を無視するため',
+      'データによらずUIを構成するため',
     ],
   ),
   QuizQuestion(
-    'Which widget should you try to use more often: StatelessWidget or StatefulWidget?',
+    'StatelessWidget or StatefulWidget 使えるならどっちを使うべき？',
     [
       'StatelessWidget',
       'StatefulWidget',
-      'Both are equally good',
-      'None of the above',
+      'どっちでもいい',
+      'どっちでもない',
     ],
   ),
   QuizQuestion(
-    'What happens if you change data in a StatelessWidget?',
+    'StatelessWidgetでデータに変更が発生したらどうなる？',
     [
-      'The UI is not updated',
-      'The UI is updated',
-      'The closest StatefulWidget is updated',
-      'Any nested StatefulWidgets are updated',
+      'UIは変わらない',
+      'UIは更新される',
+      '最も近いStatefulWidgetが更新される',
+      'ネストされてるStatefulWidgetが更新される',
     ],
   ),
   QuizQuestion(
-    'How should you update data inside of StatefulWidgets?',
+    'StatefulWidget内のデータ更新を反映するには？',
     [
-      'By calling setState()',
-      'By calling updateData()',
-      'By calling updateUI()',
-      'By calling updateState()',
+      'setState()',
+      'updateData()',
+      'updateUI()',
+      'updateState()',
     ],
   ),
 ];
