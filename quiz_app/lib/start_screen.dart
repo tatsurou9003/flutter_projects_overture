@@ -19,7 +19,7 @@ class StartScreen extends StatelessWidget {
           ),
           const SizedBox(height: 80),
           Text(
-            'Learn Flutter the fun way',
+            'Flutterを学べ',
             style: GoogleFonts.lato(
               color: const Color.fromARGB(255, 52, 255, 218),
               fontSize: 24,
@@ -27,6 +27,7 @@ class StartScreen extends StatelessWidget {
           ),
           const SizedBox(height: 30),
           Container(
+            width: 120,
             decoration: BoxDecoration(
               gradient: const LinearGradient(
                 colors: [
@@ -51,7 +52,8 @@ class StartScreen extends StatelessWidget {
                   padding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
                   child: const Text(
-                    'START QUIZ',
+                    'スタート',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w900,

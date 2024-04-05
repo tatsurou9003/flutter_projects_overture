@@ -2,15 +2,7 @@
 
 A new Flutter project.
 
-## Getting Started
+## memo
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+・Expanded は親ウィジェットの幅に合わせて、子ウィジェットの幅を制限する（親の幅まで広げる）。Flexible は親より子が小さい場合はギチギチにならず、余白ができる。
+・getter を使うことでメソッドでなくプロパティ（変数）のように値を取得できる（ちょっと短くなる）。

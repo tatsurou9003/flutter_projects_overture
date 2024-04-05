@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/question_summary/questions_summary.dart';
 
@@ -32,7 +33,6 @@ class ResultsScreen extends StatelessWidget {
     final numCorrectQuestions = summaryData
         .where((data) => data['user_answer'] == data['correct_answer'])
         .length;
-
     return SizedBox(
       width: double.infinity,
       child: Container(
@@ -40,15 +40,24 @@ class ResultsScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              '$numCorrectQuestions / $numTotalQuestions',
-              style: const TextStyle(
-                  color: Color.fromARGB(255, 52, 255, 218), fontSize: 24),
-              textAlign: TextAlign.center,
+            CircularPercentIndicator(
+              radius: 80.0,
+              lineWidth: 13.0,
+              animation: true,
+              percent: numCorrectQuestions.toDouble() / numTotalQuestions,
+              center: Text(
+                '$numCorrectQuestions / $numTotalQuestions',
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                    color: Color.fromARGB(255, 31, 221, 186)),
+              ),
+              circularStrokeCap: CircularStrokeCap.round,
+              progressColor: const Color.fromARGB(255, 31, 221, 186),
             ),
-            const SizedBox(height: 60),
+            const SizedBox(height: 40),
             QuestionsSummary(summaryData: summaryData),
-            const SizedBox(height: 80),
+            const SizedBox(height: 40),
             Container(
               height: 40,
               width: 120,
@@ -77,7 +86,7 @@ class ResultsScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         vertical: 10, horizontal: 15),
                     child: const Text(
-                      'RESTART',
+                      'もう一度',
                       style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w900,

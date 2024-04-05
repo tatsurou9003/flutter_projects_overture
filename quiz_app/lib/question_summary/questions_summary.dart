@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsSummary extends StatelessWidget {
   const QuestionsSummary({
@@ -38,27 +39,54 @@ class SummaryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isCorrectAnswer =
+        itemData['user_answer'] == itemData['correct_answer'];
+    print(itemData);
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          ((itemData['question_index'] as int) + 1).toString(),
-          style: const TextStyle(color: Colors.white),
+        Container(
+          width: 30,
+          height: 30,
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: isCorrectAnswer
+                ? const Color.fromARGB(255, 52, 255, 218)
+                : Color.fromARGB(255, 238, 67, 70),
+            borderRadius: BorderRadius.circular(100),
+          ),
+          child: Text(
+            ((itemData['question_index'] as int) + 1).toString(),
+            style: const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.bold),
+          ),
         ),
+        const SizedBox(width: 20),
         Expanded(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(itemData['question'] as String,
+                  style: GoogleFonts.lato(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  )),
+              const SizedBox(height: 8),
               Text(
-                itemData['question'] as String,
-                style: const TextStyle(color: Colors.white),
+                '回答: ${itemData['user_answer'] as String}',
+                style:
+                    const TextStyle(color: Color.fromARGB(255, 202, 171, 252)),
               ),
+              const SizedBox(height: 4),
               Text(
-                itemData['user_answer'] as String,
-                style: const TextStyle(color: Colors.white),
+                '正解: ${itemData['correct_answer'] as String}',
+                style:
+                    const TextStyle(color: Color.fromARGB(255, 181, 254, 246)),
               ),
-              Text(
-                itemData['correct_answer'] as String,
-                style: const TextStyle(color: Colors.white),
-              ),
+              const SizedBox(
+                height: 12,
+              )
             ],
           ),
         )
