@@ -133,7 +133,7 @@ class _NewExpenseState extends State<NewExpense> {
                   onPressed: () {
                     _submitExpenseData();
                   },
-                  child: Text('Save Expense'))
+                  child: const Text('Save Expense'))
             ],
           )
         ],
