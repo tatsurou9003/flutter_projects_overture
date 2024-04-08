@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 var kColorScheme = ColorScheme.fromSeed(seedColor: Colors.greenAccent);
 var kColorDarkScheme = ColorScheme.fromSeed(
   brightness: Brightness.dark, // ColorScheme.fromseedはデフォルトでlightに最適化されている
-  seedColor: Color.fromARGB(255, 20, 123, 152),
+  seedColor: const Color.fromARGB(255, 20, 123, 152),
 );
 
 void main() {
@@ -33,7 +33,7 @@ void main() {
         ),
         textTheme: ThemeData().textTheme.copyWith(
             titleLarge: // titleLargeはappBarテキストに反映される
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 16))),
+                const TextStyle(fontWeight: FontWeight.normal, fontSize: 16))),
     // themeMode: ThemeMode.system,
     home: const Expenses(),
   ));

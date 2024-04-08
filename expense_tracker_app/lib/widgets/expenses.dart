@@ -1,4 +1,5 @@
 import 'package:expense_tracker_app/chart/chart.dart';
+import 'package:expense_tracker_app/widgets/month_scroll.dart';
 import 'package:expense_tracker_app/widgets/expenses_list/expenses_list.dart';
 import 'package:expense_tracker_app/models/expense.dart';
 import 'package:expense_tracker_app/widgets/new_expense.dart';
@@ -14,14 +15,14 @@ class Expenses extends StatefulWidget {
 class _ExpensesState extends State<Expenses> {
   final List<Expense> _registerExpenses = [
     Expense(
-      title: 'Flutter Course',
-      amount: 1999,
+      title: 'Flutter講座',
+      amount: 1500,
       date: DateTime.now(),
       category: Category.work,
     ),
     Expense(
-      title: 'Cinema',
-      amount: 1569,
+      title: '映画館',
+      amount: 1200,
       date: DateTime.now(),
       category: Category.leisure,
     ),
@@ -53,9 +54,9 @@ class _ExpensesState extends State<Expenses> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 4),
-        content: const Text('Expense deleted'),
+        content: const Text('削除しました'),
         action: SnackBarAction(
-            label: 'Undo',
+            label: '元に戻す',
             onPressed: () {
               setState(() {
                 _registerExpenses.insert(expenseIndex, expense);
@@ -68,7 +69,7 @@ class _ExpensesState extends State<Expenses> {
   @override
   Widget build(BuildContext context) {
     Widget mainContent = const Center(
-      child: Text('No expense found. Start adding some.'),
+      child: Text('お金を使ったら記録！'),
     );
     if (_registerExpenses.isNotEmpty) {
       mainContent = ExpensesList(
@@ -79,7 +80,7 @@ class _ExpensesState extends State<Expenses> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Expense tracker'),
+        title: const Text('支出'),
         actions: [
           IconButton(
             onPressed: _openAddExpenseOverlay,
@@ -90,6 +91,7 @@ class _ExpensesState extends State<Expenses> {
       body: Column(
         children: [
           Chart(expenses: _registerExpenses),
+          const MonthScroll(),
           Expanded(child: mainContent),
         ],
       ),

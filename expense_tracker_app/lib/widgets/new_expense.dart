@@ -58,6 +58,7 @@ class _NewExpenseState extends State<NewExpense> {
         amount: enteredAmount,
         date: _selectedDate!,
         category: _selectedCategory));
+    print(_selectedDate!.month);
     Navigator.pop(context);
   }
 
@@ -77,7 +78,7 @@ class _NewExpenseState extends State<NewExpense> {
           TextField(
             controller: _titleController,
             maxLength: 50,
-            decoration: const InputDecoration(label: Text('Title')),
+            decoration: const InputDecoration(label: Text('科目名')),
           ),
           Row(
             children: [
@@ -85,8 +86,8 @@ class _NewExpenseState extends State<NewExpense> {
                 child: TextField(
                   controller: _amountController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                      prefixText: '¥', label: Text('Amount')),
+                  decoration:
+                      const InputDecoration(prefixText: '¥', label: Text('金額')),
                 ),
               ),
               Expanded(
@@ -94,7 +95,7 @@ class _NewExpenseState extends State<NewExpense> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(_selectedDate == null
-                      ? 'No date selected'
+                      ? '日付を選択'
                       : formatter.format(_selectedDate!)),
                   IconButton(
                       onPressed: _presentDatePicker,
@@ -128,12 +129,12 @@ class _NewExpenseState extends State<NewExpense> {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Cancel')),
+                  child: const Text('やめとく')),
               ElevatedButton(
                   onPressed: () {
                     _submitExpenseData();
                   },
-                  child: const Text('Save Expense'))
+                  child: const Text('追加'))
             ],
           )
         ],

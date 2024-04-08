@@ -16,6 +16,15 @@ class Chart extends StatelessWidget {
     ];
   }
 
+  // categoryごとに返されたbucketとMonthScrollで選択された月から、expenseを集計する関数
+  List<ExpenseBucket> filteredBuckets(int number) {
+    return buckets.where((bucket) {
+      return bucket.expenses.any((expense) {
+        return expense.date.month == number; // 1月のデータのみを集計
+      });
+    }).toList(); // [0, 0, 0, 0]
+  }
+
   // 各カテゴリーの合計金額の最大値を取得
   int get maxTotalExpense {
     int maxTotalExpense = 0;
@@ -37,6 +46,7 @@ class Chart extends StatelessWidget {
       width: double.infinity,
       height: 180,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
         gradient: LinearGradient(colors: [
           Theme.of(context).colorScheme.primary.withOpacity(0.3),
           Theme.of(context).colorScheme.primary.withOpacity(0.0)
