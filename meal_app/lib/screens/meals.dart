@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/models/meal.dart';
+import 'package:meal_app/screens/meal_detail.dart';
+import 'package:meal_app/widgets/meal_item.dart';
 
 class MealsScreen extends StatelessWidget {
   const MealsScreen({super.key, required this.title, required this.meals});
 
   final String title;
   final List<Meal> meals;
+
+  void selectMeal(BuildContext context, Meal meal) {
+    Navigator.of(context).push(
+        MaterialPageRoute(builder: (ctx) => MealDetailsScreen(meal: meal)));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +40,12 @@ class MealsScreen extends StatelessWidget {
     if (meals.isNotEmpty) {
       content = ListView.builder(
         itemCount: meals.length,
-        itemBuilder: ((context, index) => Text(
-              meals[index].title,
-              style: const TextStyle(color: Colors.white),
+        itemBuilder: ((ctx, index) => MealItem(
+              meal: meals[index],
+              onSelectMeal: (meal) {
+                // ここで実行されるわけではないので無名関数として渡す(コールバック)
+                selectMeal(ctx, meal);
+              },
             )),
       );
     }
