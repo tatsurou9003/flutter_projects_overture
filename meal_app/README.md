@@ -37,3 +37,15 @@ pushReplacement でスタックを置き換える（上に遷移先を載せな�
 ### Navigator
 
 Navigator.pop でデータを返し、.push したところで受け取る。
+
+### RiverPod
+
+StateNotifier クラス内はイミュータブルであり、直接 List を操作できない（add, remove）。
+
+アクションやイベントハンドラ内で状態変更を引き起こすために ref.read を使用し、状態の監視と UI の再構築には ref.watch を使用する（分担する）が吉。
+
+statelessWidget の場合、consumerWidget に変更して build メソッド内で WidgetRef を受け取るようにする。
+
+プロバイダが管理する状態の名前は state にしないとダメ。
+
+Provider で他の Provider(StateNotifier)の計算結果をフィルタリング・キャッシュできる。
