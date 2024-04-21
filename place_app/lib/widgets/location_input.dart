@@ -4,16 +4,30 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:place_app/models/place.dart';
+
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  const LocationInput({super.key, required this.onSelectLocation});
+
+  final void Function(PlaceLocation) onSelectLocation;
 
   @override
   State<LocationInput> createState() => _LocationInputState();
 }
 
 class _LocationInputState extends State<LocationInput> {
+  PlaceLocation? _pickedLocation;
   bool _isGettingLocation = false;
   final apiKey = dotenv.env['API_KEY'];
+
+  String get locationImage {
+    if (_pickedLocation == null) {
+      return '';
+    }
+    final lat = _pickedLocation!.latitude;
+    final lng = _pickedLocation!.longitude;
+    return 'https://maps.googleapis.com/maps/api/staticmap?center=$lat,$lng&zoom=16&size=600x300&maptype=roadmap&markers=color:red%7Clabel:A%7C$lat,$lng&key=$apiKey';
+  }
 
   void getCurrentLocation() async {
     Location location = Location();
@@ -57,11 +71,17 @@ class _LocationInputState extends State<LocationInput> {
     final response = await http.get(url);
     final resData = json.decode(response.body);
     final address = resData['results'][0]['formatted_address'];
-    print(address);
 
     setState(() {
+      _pickedLocation = PlaceLocation(
+        latitude: lat,
+        longitude: lng,
+        address: address,
+      );
       _isGettingLocation = false;
     });
+
+    widget.onSelectLocation(_pickedLocation!);
   }
 
   @override
@@ -72,6 +92,15 @@ class _LocationInputState extends State<LocationInput> {
             color: Theme.of(context).colorScheme.onBackground,
           ),
     );
+
+    if (_pickedLocation != null) {
+      previewContent = Image.network(
+        locationImage,
+        fit: BoxFit.cover,
+        width: double.infinity,
+      );
+    }
+
     if (_isGettingLocation) {
       previewContent = const CircularProgressIndicator();
     }

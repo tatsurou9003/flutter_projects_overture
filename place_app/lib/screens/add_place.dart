@@ -5,6 +5,7 @@ import 'package:place_app/widgets/image_input.dart';
 import 'dart:io';
 
 import 'package:place_app/widgets/location_input.dart';
+import 'package:place_app/models/place.dart';
 
 class AddPlaceScreen extends ConsumerStatefulWidget {
   const AddPlaceScreen({super.key});
@@ -16,15 +17,18 @@ class AddPlaceScreen extends ConsumerStatefulWidget {
 class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
   final _titleController = TextEditingController();
   File? _selectedImage;
+  PlaceLocation? _selectedLocation;
 
   void _savePlace() {
     final enteredTitle = _titleController.text;
-    if (enteredTitle.isEmpty || _selectedImage == null) {
+    if (enteredTitle.isEmpty ||
+        _selectedImage == null ||
+        _selectedLocation == null) {
       return;
     }
     ref
         .read(userPlacesProvider.notifier)
-        .addPlace(enteredTitle, _selectedImage!);
+        .addPlace(enteredTitle, _selectedImage!, _selectedLocation!);
     Navigator.of(context).pop();
   }
 
@@ -44,33 +48,39 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
         appBar: AppBar(
           title: const Text('Add a new place'),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Column(
-            children: [
-              TextField(
-                controller: _titleController,
-                decoration: const InputDecoration(
-                  labelText: 'Title',
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                TextField(
+                  controller: _titleController,
+                  decoration: const InputDecoration(
+                    labelText: 'Title',
+                  ),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.onBackground,
+                  ),
                 ),
-                style: TextStyle(
-                  color: Theme.of(context).colorScheme.onBackground,
+                const SizedBox(height: 24),
+                ImageInput(
+                  onPickImage: (image) {
+                    _selectedImage = image;
+                  },
                 ),
-              ),
-              const SizedBox(height: 24),
-              ImageInput(
-                onPickImage: (image) {
-                  _selectedImage = image;
-                },
-              ),
-              const SizedBox(height: 24),
-              LocationInput(),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _savePlace,
-                child: const Text('Add place'),
-              ),
-            ],
+                const SizedBox(height: 24),
+                LocationInput(
+                  onSelectLocation: (location) {
+                    _selectedLocation = location;
+                  },
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton(
+                  onPressed: _savePlace,
+                  child: const Text('Add place'),
+                ),
+              ],
+            ),
           ),
         ),
       ),
