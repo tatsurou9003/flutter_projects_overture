@@ -23,14 +23,17 @@ class UserPlacesNotifier extends StateNotifier<List<Place>> {
     final db = await _getDatabase();
     final data = await db.query('user_places');
     final places = data
-        .map((item) => Place(
+        .map(
+          (item) => Place(
             id: item['id'] as String,
             title: item['title'] as String,
             image: File(item['image'] as String),
             location: PlaceLocation(
                 latitude: item['lat'] as double,
                 longitude: item['lng'] as double,
-                address: item['address'] as String)))
+                address: item['address'] as String),
+          ),
+        )
         .toList();
 
     state = places;

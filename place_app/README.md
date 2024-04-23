@@ -1,16 +1,25 @@
 # place_app
 
-A new Flutter project.
+カメラ、位置情報、google_maps_flutter を使ってみたアプリ
 
-## Getting Started
+## TIL
 
-This project is a starting point for a Flutter application.
+### Image
 
-A few resources to get you started if this is your first Flutter project:
+Image.file()でデバイス内の path を与えれば画像を取得できる。Image.file(path)か、image: FileImage(path)でローカルパスの画像ファイルを表示できる、ただし Flutter Web ではできないっぽい？
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### デフォルト値
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+constructor のデフォルト値は const が必要
+
+### path, path_provider
+
+path はパスをいじくる用、path_provider は OS 毎の利用可能なファイルパスを取得する
+
+### as
+
+パッケージの名前衝突を防ぐために as
+
+### sqflite
+
+sqflite の型は、INTEGER Dart type: int, REAL Dart type: num, TEXT Dart type: String, BLOB, Dart type: Uint8List
