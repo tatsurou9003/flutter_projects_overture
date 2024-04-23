@@ -38,6 +38,7 @@ class _MapScreenState extends State<MapScreen> {
               ),
           ]),
       body: GoogleMap(
+        mapType: MapType.hybrid,
         onTap: !widget.isSelecting
             ? null
             : (position) {
